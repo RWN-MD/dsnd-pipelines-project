@@ -2,3 +2,11 @@ scikit-learn
 pandas
 spacy
 notebook
+pickle
+numpy
+seaborn
+sklearn
+joblib
+nltk
+matplotlib
+jupyter
