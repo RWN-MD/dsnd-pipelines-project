@@ -118,7 +118,6 @@ The repository includes pre-trained models:
 
 - `gradient_boosting_model.pkl`
 - `logistic_regression_model.pkl`
-- `final_optimized_model.pkl`
 
 To load these models for predictions, use the following code:
 
