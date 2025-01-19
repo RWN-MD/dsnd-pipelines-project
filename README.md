@@ -174,27 +174,71 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 # Example input data
 example_data = pd.DataFrame({
+    "Clothing ID": [1],
     "Age": [35],
-    "Positive Feedback Count": [5],
-    "Sentiment Score": [0.8],
-    "Word Count": [100],
-    "Entity Count": [10],
+    "Title": ["Some major design flaws"],
+    "Review Text": ["I had such high hopes for this dress and reall..."],
+    "Positive Feedback Count": [0],
     "Division Name": ["General"],
     "Department Name": ["Dresses"],
-    "Class Name": ["Dresses"]
+    "Class Name": ["Dresses"],
+    "Recommended IND": [0]
 })
+
+# Remove low-impact features
+example_data = example_data.drop(columns=['Clothing ID'])
+
+# Combine Title and Review Text into a single column
+example_data['Full Review'] = example_data['Title'] + " " + example_data['Review Text']
+
+# Remove redundant columns
+example_data = example_data.drop(columns=['Title', 'Review Text'])
 
 # Encode categorical features
 encoder = OneHotEncoder(sparse_output=False, drop='first')
 example_encoded = encoder.fit_transform(example_data[["Division Name", "Department Name", "Class Name"]])
+example_data = example_data.drop(columns=["Division Name", "Department Name", "Class Name"])
+
+# Creating new features using NLP techniques
+
+# Normalize and tokenize text
+example_data['Processed Review'] = example_data['Full Review'].str.lower().apply(word_tokenize)
+    
+# Sentiment Analysis
+sentiment_analyzer = SentimentIntensityAnalyzer()
+example_data['Sentiment Score'] = example_data['Full Review'].apply(
+  lambda x: sentiment_analyzer.polarity_scores(x)['compound']
+)
+ 
+# Token Count
+example_data['Token Count'] = example_data['Processed Review'].apply(len)
+
+# POS Tagging
+pos_tags = [pos_tag(tokens) for tokens in example_data['Processed Review']]
+
+# Entity Count: Number of named entities (proper nouns)
+example_data['Entity Count'] = [sum(1 for _, tag in tags if tag in ('NNP', 'NNPS')) for tags in pos_tags]
+
+# Named Entity Recognition (NER)
+example_data['NER Tags'] = [ne_chunk(pos_tag(tokens)) for tokens in example_data['Processed Review']]
+
+# Create text embeddings using CountVectorizer
+embedding_vectorizer = CountVectorizer(max_features=500)
+embeddings = embedding_vectorizer.fit_transform(example_data['Full Review']).toarray()
+embedding_features = pd.DataFrame(embeddings, columns=embedding_vectorizer.get_feature_names_out())
+example_data = pd.concat([example_data.reset_index(drop=True), embedding_features.reset_index(drop=True)], axis=1)
 
 # Scale numerical features
 scaler = StandardScaler()
-example_scaled = scaler.fit_transform(example_data[["Age", "Positive Feedback Count", "Sentiment Score", "Word Count", "Entity Count"]])
+example_scaled = scaler.fit_transform(example_data[["Age", "Positive Feedback Count", "Sentiment Score", "Token Count", "Entity Count"]])
+
+# Ensure the target column is excluded and dataset contains only numeric features
+example_data = example_data.drop(columns=['Full Review', 'Processed Review', 'NER Tags'])
 
 # Combine encoded and scaled features
 import numpy as np
 prepared_input = np.hstack((example_scaled, example_encoded))
+
 ```
 
 ## Results
