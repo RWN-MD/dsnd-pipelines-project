@@ -6,27 +6,27 @@ This repository contains all the code, data, and results for the DSND Pipelines 
 
 ```
 DSND-PIPELINES-PROJECT/
-├── .vscode/                        # VSCode settings
-├── data/
-│   └── reviews.csv                 # Raw data file
-├── Class 0 Optimized_classification_report.csv
-├── Class 0 Optimized_confusion_matrix.csv
-├── Class 1 Optimized_classification_report.csv
-├── Class 1 Optimized_confusion_matrix.csv
-├── Gradient Boosting_classification_report.csv
-├── Gradient Boosting_confusion_matrix.csv
-├── gradient_boosting_model.pkl     # Gradient Boosting model pickle file
-├── Layered Inference_classification_report.csv
-├── Layered Inference_confusion_matrix.csv
-├── Logistic Regression_classification_report.csv
-├── Logistic Regression_confusion_matrix.csv
-├── logistic_regression_model.pkl   # Logistic Regression model pickle file
-├── README.md                       # Project README file
-├── starter.ipynb                   # Jupyter notebook with code and analysis
-├── .gitignore                      # Files to ignore in version control
-├── CODEOWNERS                      # Code ownership details
-├── LICENSE.txt                     # License details
-└── requirements.txt                # Python dependencies
+├── starter
+│   └──data/
+│   │  └── reviews.csv                                   # Raw data file
+│   └── starter.ipynb                                    # Jupyter notebook with code and analysis
+│   └──Class 0 Optimized_classification_report.csv
+│   └── Class 0 Optimized_confusion_matrix.csv
+│   └── Class 1 Optimized_classification_report.csv
+│   └── Class 1 Optimized_confusion_matrix.csv
+│   └── Gradient Boosting_classification_report.csv
+│   └── Gradient Boosting_confusion_matrix.csv
+│   └── gradient_boosting_model.pkl                      # Gradient Boosting model pickle file
+│   └── Layered Inference_classification_report.csv
+│   └── Layered Inference_confusion_matrix.csv
+│   └── Logistic Regression_classification_report.csv
+│   └── Logistic Regression_confusion_matrix.csv
+│   └── logistic_regression_model.pkl                    # Logistic Regression model pickle file
+├── README.md                                            # Project README file
+├── .gitignore                                           # Files to ignore in version control
+├── CODEOWNERS                                           # Code ownership details
+├── LICENSE.txt                                          # License details
+└── requirements.txt                                     # Python dependencies
 ```
 
 ## Introduction
