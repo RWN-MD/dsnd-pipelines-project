@@ -10,7 +10,7 @@ DSND-PIPELINES-PROJECT/
 │   └──data/
 │   │  └── reviews.csv                                   # Raw data file
 │   └── starter.ipynb                                    # Jupyter notebook with code and analysis
-│   └──Class 0 Optimized_classification_report.csv
+│   └── Class 0 Optimized_classification_report.csv
 │   └── Class 0 Optimized_confusion_matrix.csv
 │   └── Class 1 Optimized_classification_report.csv
 │   └── Class 1 Optimized_confusion_matrix.csv
